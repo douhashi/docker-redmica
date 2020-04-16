@@ -78,7 +78,7 @@ RUN set -eux; \
 	chmod 1777 "$HOME"
 
 ENV REDMICA_VERSION 1.0.1
-ENV REDMICA_DOWNLOAD_MD5 %%RECMICA_DOWNLOAD_MD5%%
+ENV REDMICA_DOWNLOAD_MD5 8ddd7b8698091d703ffb167da4eae82b
 
 RUN set -eux; \
 	wget -O redmine.tar.gz "https://github.com/redmica/redmica/archive/v${REDMICA_VERSION}.tar.gz"; \
