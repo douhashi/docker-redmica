@@ -28,22 +28,22 @@ for version in "${versions[@]}"; do
 	echo "$version: $fullVersion (ruby $rubyVersion; passenger $passenger)"
 
 	cp docker-entrypoint.sh "$version/"
-	sed -e 's/%%REDMINE_VERSION%%/'"$fullVersion"'/' \
+	sed -e 's/%%REDMICA_VERSION%%/'"$fullVersion"'/' \
 		-e 's/%%RUBY_VERSION%%/'"$rubyVersion"'/' \
-		-e 's/%%REDMINE_DOWNLOAD_MD5%%/'"$md5"'/' \
+		-e 's/%%REDMICA_DOWNLOAD_MD5%%/'"$md5"'/' \
 		Dockerfile-debian.template > "$version/Dockerfile"
 
 	mkdir -p "$version/passenger"
-	sed -e 's/%%REDMINE%%/iquiw\/redmica:'"$fullVersion"'/' \
+	sed -e 's/%%REDMINE%%/douhashi\/redmica:'"$fullVersion"'/' \
 		-e 's/%%PASSENGER_VERSION%%/'"$passenger"'/' \
 		Dockerfile-passenger.template > "$version/passenger/Dockerfile"
 
 	mkdir -p "$version/alpine"
 	cp docker-entrypoint.sh "$version/alpine/"
 	sed -i -e 's/gosu/su-exec/g' "$version/alpine/docker-entrypoint.sh"
-	sed -e 's/%%REDMINE_VERSION%%/'"$fullVersion"'/' \
+	sed -e 's/%%REDMICA_VERSION%%/'"$fullVersion"'/' \
 		-e 's/%%RUBY_VERSION%%/'"$rubyVersion"'/' \
-		-e 's/%%REDMINE_DOWNLOAD_MD5%%/'"$md5"'/' \
+		-e 's/%%REDMICA_DOWNLOAD_MD5%%/'"$md5"'/' \
 		Dockerfile-alpine.template > "$version/alpine/Dockerfile"
 
 	travisEnv='\n  - VERSION='"$version/alpine$travisEnv"
