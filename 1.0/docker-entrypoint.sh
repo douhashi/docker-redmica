@@ -149,6 +149,7 @@ if [ -n "$isLikelyRedmine" ]; then
 		fi
 	fi
 	if [ "$1" != 'rake' -a -z "$REDMINE_NO_DB_MIGRATE" ]; then
+    rake db:create
 		rake db:migrate
 	fi
 
